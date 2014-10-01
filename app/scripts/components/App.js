@@ -4,7 +4,9 @@
 
 'use strict';
 
-var React     = require('react/addons');
+var React     = require('react/addons'),
+    r$        = require('reqwest');
+
 
 var App = React.createClass({
 
@@ -14,6 +16,7 @@ var App = React.createClass({
       </div>
     );
   }
+
 });
 
 module.exports = App;
