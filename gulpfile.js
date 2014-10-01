@@ -14,8 +14,7 @@ var DEV_DIR         = 'dev/',
     AWS;
 
 var scssImportPaths = [
-  'app/bower_components/foundation/scss',
-  'app/bower_components/fontawesome/scss'
+  'app/bower_components/foundation/scss'
 ];
 
 
@@ -35,7 +34,8 @@ gulp.task('dev-styles', function () {
     .pipe($.compass({
       sass:        'app/scss',
       image:       'app/images',
-      css:         DEV_DIR + 'styles'
+      css:         DEV_DIR + 'styles',
+      import_path: scssImportPaths
     }))
     .pipe(gulp.dest(DEV_DIR + 'styles'))
     .pipe($.size())

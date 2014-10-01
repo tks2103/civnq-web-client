@@ -1,6 +1,7 @@
 {
-  "name": "poebuilder-client",
+  "name": "civnq-web-client",
   "version": "0.0.0",
   "dependencies": {
+    "foundation": ">=5.1.1"
   }
 }
