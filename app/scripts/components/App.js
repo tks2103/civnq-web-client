@@ -14,9 +14,9 @@ var App = React.createClass({
   req: function() {
     var data = {};
     r$({
-      url:         'api/matches',
+      url:         '/api/matches',
       type:        'json',
-      method:      'POST',
+      method:      'GET',
       contentType: 'application/json',
       data:        data
     }).then(function(response) {
