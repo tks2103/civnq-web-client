@@ -7,17 +7,18 @@
 var React     = require('react/addons');
 
 
-var TopBar  = React.createClass({
+var TeamInput  = React.createClass({
 
   render: function() {
     return (
-      <div>
-        topbar
-      </div>
+      <form>
+        <input></input>
+        <input></input>
+      </form>
     );
   }
 
 });
 
-module.exports = TopBar;
+module.exports = TeamInput;
 
