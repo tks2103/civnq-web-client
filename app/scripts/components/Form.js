@@ -30,7 +30,7 @@ var Form  = React.createClass({
 
 
   render: function() {
-    var inputs = this.state.matchType == "Teamer" ? <TeamInput /> : <PlayerInput />;
+    var inputs = this.state.matchType == "Teamer" ? <TeamInput /> : <PlayerInput max={5}/>;
     return (
       <div>
         <select onChange={this.handleGame} value={this.state.game}>
