@@ -14,8 +14,9 @@ var PlayerInput  = React.createClass({
   },
 
 
-  handleKeyUp: function() {
-    this.setState({ inputs: this.state.inputs + 1 });
+  handleClick: function(event) {
+    event.preventDefault();
+    this.setState({inputs: this.state.inputs +1})
   },
 
   
@@ -24,8 +25,23 @@ var PlayerInput  = React.createClass({
     for(var i = 0; i < num-1; i++) {
       inputs.push(<input></input>);
     }
-    inputs.push(<input onKeyUp={this.handleKeyUp} ref="lastInput"></input>);
+    inputs.push(<input ref="lastInput"></input>);
     return inputs;
+  },
+  
+  isMax: function() {
+    console.log(this.state.inputs);
+    console.log(this.props.max);
+    return (this.state.inputs == this.props.max);
+  },
+
+
+  renderButton: function() {
+    if (this.isMax() == false) {
+      return (<button onClick={this.handleClick}>+</button>) 
+    } else {
+      return null;  
+    } 
   },
 
 
@@ -35,6 +51,7 @@ var PlayerInput  = React.createClass({
       <form>
         Teams
         {inputElements}
+        {this.renderButton()}
       </form>
     );
   }
