@@ -22,16 +22,13 @@ var PlayerInput  = React.createClass({
   
   generateInputs: function(num) {
     var inputs = [];
-    for(var i = 0; i < num-1; i++) {
-      inputs.push(<input></input>);
+    for(var i = 0; i < num; i++) {
+      inputs.push(<input key={i}></input>);
     }
-    inputs.push(<input ref="lastInput"></input>);
     return inputs;
   },
   
   isMax: function() {
-    console.log(this.state.inputs);
-    console.log(this.props.max);
     return (this.state.inputs == this.props.max);
   },
 
@@ -48,11 +45,11 @@ var PlayerInput  = React.createClass({
   render: function() {
     var inputElements = this.generateInputs(Math.min(this.state.inputs, this.props.max));
     return (
-      <form>
-        Teams
+      <div>
+        Players
         {inputElements}
         {this.renderButton()}
-      </form>
+      </div>
     );
   }
 
