@@ -1,22 +1,13 @@
 'use strict';
 
 var gulp      = require('gulp'),
-    fs        = require('fs'),
     url       = require('url'),
     pushState = require('connect-pushstate/lib/pushstate').pushState,
     proxy     = require('proxy-middleware'),
     notifier  = new require('node-notifier')(),
     $         = require('gulp-load-plugins')();
 
-var DEV_DIR         = 'dev/',
-    KEY_DIR         = process.env.HOME+'/.attack-slug',
-    CDN_PREFIX      = 'https://d37ykugyuc47vx.cloudfront.net/',
-    AWS;
-
-var scssImportPaths = [
-  'app/bower_components/foundation/scss'
-];
-
+var DEV_DIR         = 'dev/';
 
 // Styles
 gulp.task('dev-styles', function () {
@@ -34,8 +25,7 @@ gulp.task('dev-styles', function () {
     .pipe($.compass({
       sass:        'app/scss',
       image:       'app/images',
-      css:         DEV_DIR + 'styles',
-      import_path: scssImportPaths
+      css:         DEV_DIR + 'styles'
     }))
     .pipe(gulp.dest(DEV_DIR + 'styles'))
     .pipe($.size())
