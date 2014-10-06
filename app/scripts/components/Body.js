@@ -26,7 +26,7 @@ var Body = React.createClass({
           </Col>
           <Col md={6}>
             <Panel>
-              <h2> Civilization V Rankings </h2>
+              <h2> Civilization BE Rankings </h2>
               <p> #1 Arvius </p>
               <p> #2 Lek </p>
               <p> #3 Filthy Robot </p>
