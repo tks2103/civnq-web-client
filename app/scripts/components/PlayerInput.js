@@ -19,11 +19,22 @@ var PlayerInput  = React.createClass({
     this.setState({inputs: this.state.inputs +1})
   },
 
+
+  logPlayers: function() { 
+    var players = [];
+    for(var i = 0; i < this.state.inputs; i++) {
+      var player = (this.refs['playerInput' + i].getDOMNode().value.trim());
+      players.push(player);
+    } 
+    this.props.update(players);
+  },
+
   
   generateInputs: function(num) {
     var inputs = [];
     for(var i = 0; i < num; i++) {
-      inputs.push(<input key={i}></input>);
+      var playerInput = "playerInput" + i; 
+      inputs.push(<input onKeyUp={this.logPlayers} ref={playerInput} key={i}></input>);
     }
     return inputs;
   },
