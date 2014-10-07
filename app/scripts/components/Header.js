@@ -19,11 +19,11 @@ var Header = React.createClass({
     return (
       <Navbar fluid staticTop inverse>
         <Nav collapsable navbar pullRight>
-          <a className="navbar-brand" href="#">Civ No Quitters</a>
-          <NavItem key={1} href="#">Post a Game</NavItem>
-          <DropdownButton key={3} title="View Matches">
-            <MenuItem key="1">Unconfirmed Matches</MenuItem>
-            <MenuItem key="2">Recently Confirmed</MenuItem>
+          <a className="navbar-brand" href="#" onClick={this.props.displayRankings}>Civ No Quitters</a>
+          <NavItem onClick={this.props.togglePostMatch} key={1} href="#">Post a Match</NavItem>
+          <DropdownButton ref="dropdown" key={3} title="View Matches">
+            <MenuItem onSelect={this.props.displayUnconfirmedMatches} key="1">Unconfirmed Matches</MenuItem>
+            <MenuItem onSelect={this.props.displayConfirmedMatches} key="2">Recently Confirmed</MenuItem>
           </DropdownButton>
           <NavItem key={2} href="#">Login</NavItem>
         </Nav>
