@@ -4,13 +4,19 @@
 
 'use strict';
 
-var React           = require('react/addons');
+var React           = require('react/addons'),
+    Match           = require('./Match');
 
 var ConfirmedMatches = React.createClass({
 
   render: function() {
     return (
-      <div></div>
+      <div>
+        <Match />
+        <Match />
+        <Match />
+        <Match />
+      </div>
     );
   }
 

@@ -4,13 +4,18 @@
 
 'use strict';
 
-var React           = require('react/addons');
+var React           = require('react/addons'),
+    Match           = require('./Match');
 
 var UnconfirmedMatches = React.createClass({
 
   render: function() {
     return (
-      <div></div>
+      <div>
+        <Match />
+        <Match />
+        <Match />
+      </div>
     );
   }
 

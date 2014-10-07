@@ -57,6 +57,7 @@ var App = React.createClass({
                 displayRankings={this.displayRankings} />
         <Grid>
           {this.state.body == "Rankings" ? <Body /> : null}
+          {this.state.body == "Rankings" ? <Rankings /> : null}
           {this.state.body == "UnconfirmedMatches" ? <UnconfirmedMatches /> : null}
           {this.state.body == "ConfirmedMatches" ? <ConfirmedMatches /> : null}
         </Grid>
