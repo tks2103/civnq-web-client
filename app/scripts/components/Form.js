@@ -22,7 +22,7 @@ var Form  = React.createClass({
   updatePlayers: function(obj) {
      this.setState({ players: obj}); 
   },  
-
+  
 
   handleGame: function(event) {
     this.setState({ game: event.nativeEvent.target.value });
@@ -44,14 +44,15 @@ var Form  = React.createClass({
     this.logMatch({
       game: this.state.game, 
       matchType: this.state.matchType,
-      players: this.state.players 
+      players: this.state.players,
+      comment: this.state.comment
     });
   },
 
 
   render: function() {
     var max = this.state.matchType == "Duel" ? 2 : 100;
-    var inputs = this.state.matchType == "Teamer" ? <TeamInput /> : <PlayerInput update={this.updatePlayers} max={max}/>;
+    var inputs = this.state.matchType == "Teamer" ? <TeamInput update={this.updatePlayers} /> : <PlayerInput update={this.updatePlayers} max={max}/>;
     return (
       <div>
         <select ref="game" onChange={this.handleGame} value={this.state.game}>
