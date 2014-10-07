@@ -11,7 +11,8 @@ var React           = require('react/addons'),
     Grid            = require('react-bootstrap/Grid'),
     Body            = require('./Body'),
     Row             = require('react-bootstrap/Row'),
-    Col             = require('react-bootstrap/Col');
+    Col             = require('react-bootstrap/Col'),
+    Form            = require('./Form');
 
 var App = React.createClass({
 
@@ -24,6 +25,7 @@ var App = React.createClass({
           <Rankings />
           <Rankings />
         </Grid>
+        <Form />  
       </div>
     );
   }

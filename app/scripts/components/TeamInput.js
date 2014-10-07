@@ -10,15 +10,26 @@ var React       = require('react/addons'),
 var TeamInput  = React.createClass({
 
  getInitialState: function() {
-    return { teams: 2 }
+    return { 
+      teams: 2,
+      players: []
+    }
  },
+ 
+
+ updatePlayers: function(i, obj) {
+    var players = this.state.players;
+    players[i-1] = obj;
+    this.setState({ players: players });
+    this.props.update(players);
+ },  
+  
 
  generateTeamElement: function(i) {
     return (
       <div key={i}>
         <label>Team <span> {i = i +1}</span></label>
-        <PlayerInput max={10}/>
-        <textarea ref="comment" placeholder="Comments"></textarea>
+        <PlayerInput update={this.updatePlayers.bind(this, i)} max={10}/>
       </div>
     )
  },
@@ -49,6 +60,7 @@ var TeamInput  = React.createClass({
     return (
       <div>
         {inputTeams}
+        <textarea ref="comment" placeholder="Comments"></textarea>
         {this.generateButton()}
       </div>
     );
