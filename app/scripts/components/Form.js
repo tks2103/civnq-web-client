@@ -24,6 +24,12 @@ var Form  = React.createClass({
   },  
   
 
+  logComment: function() { 
+    var commentInput = this.refs.comment.getDOMNode().value; 
+    this.setState({comment: commentInput});
+  },
+
+
   handleGame: function(event) {
     this.setState({ game: event.nativeEvent.target.value });
   },
@@ -65,6 +71,7 @@ var Form  = React.createClass({
           <option value="Teamer">Teamer</option>
         </select>
         {inputs}
+        <textarea ref="comment" onChange={this.logComment} placeholder="Comments"></textarea>
         <button onClick={this.handleSubmit}>Submit</button>
       </div>
     );

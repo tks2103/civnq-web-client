@@ -23,8 +23,8 @@ var TeamInput  = React.createClass({
     this.setState({ players: players });
     this.props.update(players);
  },  
-  
-
+ 
+ 
  generateTeamElement: function(i) {
     return (
       <div key={i}>
@@ -60,7 +60,6 @@ var TeamInput  = React.createClass({
     return (
       <div>
         {inputTeams}
-        <textarea ref="comment" placeholder="Comments"></textarea>
         {this.generateButton()}
       </div>
     );
