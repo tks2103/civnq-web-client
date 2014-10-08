@@ -10,6 +10,7 @@ var React           = require('react/addons'),
 var UnconfirmedMatches = React.createClass({
 
   render: function() {
+    console.log(this.props.data.unconfirmed_matches);
     return (
       <div>
         <Match />

@@ -33,7 +33,16 @@ var App = React.createClass({
 
 
   displayUnconfirmedMatches: function() {
-    this.setState({ body: "UnconfirmedMatches" });
+    r$({
+      url:         '/api/unconfirmed_matches',
+      type:        'json',
+      method:      'GET',
+      contentType: 'application/json'
+    }).then(function(response) {
+      this.setState({ body: "UnconfirmedMatches", unconfirmed_matches: response });
+    }.bind(this)).fail(function(response) {
+      console.log('fail');
+    });
   },
 
 
@@ -58,7 +67,7 @@ var App = React.createClass({
         <Grid>
           {this.state.body == "Rankings" ? <Body /> : null}
           {this.state.body == "Rankings" ? <Rankings /> : null}
-          {this.state.body == "UnconfirmedMatches" ? <UnconfirmedMatches /> : null}
+          {this.state.body == "UnconfirmedMatches" ? <UnconfirmedMatches data={this.state.unconfirmed_matches} /> : null}
           {this.state.body == "ConfirmedMatches" ? <ConfirmedMatches /> : null}
         </Grid>
         <Form />  
