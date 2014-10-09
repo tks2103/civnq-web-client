@@ -22,7 +22,6 @@ var UnconfirmedMatches = React.createClass({
 
   render: function() {
     var matches = this.getMatch();
-    console.log(matches);
     return (
       <div>
         {matches}
