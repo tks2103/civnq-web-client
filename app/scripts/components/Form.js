@@ -5,6 +5,7 @@
 'use strict';
 
 var React       = require('react/addons'),
+    r$          = require('reqwest'),
     TeamInput   = require('./TeamInput'),
     PlayerInput = require('./PlayerInput');
 
@@ -41,7 +42,19 @@ var Form  = React.createClass({
 
 
   logMatch: function(obj) {
+    var obj = {unconfirmed_match: obj};
     console.log(obj);
+    r$({
+      url:         '/api/unconfirmed_matches',
+      type:        'json',
+      method:      'POST',
+      data:        obj,
+      contentType: 'application/json'
+    }).then(function(response) {
+      console.log(response);
+    }.bind(this)).fail(function(response) {
+      console.log('fail');
+    });
   },
 
 

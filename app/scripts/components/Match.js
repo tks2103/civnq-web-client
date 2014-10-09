@@ -10,29 +10,44 @@ var React           = require('react/addons'),
     ListGroup       = require('react-bootstrap/ListGroup'),
     ListGroupItem   = require('react-bootstrap/ListGroupItem');
 
-var Match = React.createClass({
+var Match = React.createClass({ 
+ 
+ generatePlayerElement: function(i) {
+    return (
+      <div key={i}>
+        <ListGroupItem>{this.props.data.teams[i]}</ListGroupItem>
+      </div>
+    )
+ },
+
+
+ generatePlayers: function(num) {
+    var players = [];
+    for(var i = 0; i < num; i++) {
+      players.push(this.generatePlayerElement(i));
+    }
+    return players;
+ },
+ 
 
   render: function() {
+    var players = this.generatePlayers(this.props.data.teams.length);
     return (
       <Panel>
         <h3> Game #1000 </h3>
         <Well>
-          <p>Type: FFA</p>
+          <p>Type: {this.props.data.match_type}</p>
           <p>Reported by: Arvius</p>
         </Well>
 
         <Well>
           <ListGroup>
-            <ListGroupItem>Arvius</ListGroupItem>
-            <ListGroupItem>Lek</ListGroupItem>
-            <ListGroupItem>FilthyRobot</ListGroupItem>
-            <ListGroupItem>Panang</ListGroupItem>
-            <ListGroupItem>Curry</ListGroupItem>
-            <ListGroupItem>Strictly</ListGroupItem>
+            {players}
           </ListGroup>
         </Well>
         <Well>
-          Comments
+          Comments:
+          {this.props.data.comment}
         </Well>
       </Panel>
     );
