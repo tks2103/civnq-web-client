@@ -47,7 +47,16 @@ var App = React.createClass({
 
 
   displayConfirmedMatches: function() {
-    this.setState({ body: "ConfirmedMatches" });
+     r$({
+      url:         '/api/confirmed_matches',
+      type:        'json',
+      method:      'GET',
+      contentType: 'application/json'
+    }).then(function(response) {
+      this.setState({ body: "ConfirmedMatches", confirmed_matches: response });
+    }.bind(this)).fail(function(response) {
+      console.log('fail');
+    });
   },
 
 
@@ -59,18 +68,17 @@ var App = React.createClass({
   render: function() {
     return (
       <div id='app'>
-        {this.state.postMatchModal ? <PostMatch togglePostMatch={this.togglePostMatch} /> : null }
-        <Header togglePostMatch={this.togglePostMatch} 
-                displayConfirmedMatches={this.displayConfirmedMatches} 
-                displayUnconfirmedMatches={this.displayUnconfirmedMatches}
-                displayRankings={this.displayRankings} />
-        <Grid>
-          {this.state.body == "Rankings" ? <Body /> : null}
-          {this.state.body == "Rankings" ? <Rankings /> : null}
-          {this.state.body == "UnconfirmedMatches" ? <UnconfirmedMatches data={this.state.unconfirmed_matches} /> : null}
-          {this.state.body == "ConfirmedMatches" ? <ConfirmedMatches /> : null}
+       {this.state.postMatchModal ? <PostMatch togglePostMatch={this.togglePostMatch} /> : null }
+          <Header togglePostMatch={this.togglePostMatch} 
+                 displayConfirmedMatches={this.displayConfirmedMatches} 
+                 displayUnconfirmedMatches={this.displayUnconfirmedMatches}
+                 displayRankings={this.displayRankings} />
+          <Grid>
+            {this.state.body == "Rankings" ? <Body /> : null}
+            {this.state.body == "Rankings" ? <Rankings /> : null}
+            {this.state.body == "UnconfirmedMatches" ? <UnconfirmedMatches data={this.state.unconfirmed_matches} /> : null}
+            {this.state.body == "ConfirmedMatches" ? <ConfirmedMatches data={this.state.confirmed_matches} /> : null}
         </Grid>
-        <Form />  
       </div>
     );
   }

@@ -5,7 +5,6 @@
 'use strict';
 
 var React       = require('react/addons'),
-    r$          = require('reqwest'),
     TeamInput   = require('./TeamInput'),
     PlayerInput = require('./PlayerInput');
 
@@ -20,14 +19,14 @@ var Form  = React.createClass({
   },
 
 
-  updatePlayers: function(obj) {
-     this.setState({ players: obj}); 
+  updateTeams: function(obj) {
+     this.setState({ teams: obj}); 
   },  
   
 
   logComment: function() { 
-    var commentInput = this.refs.comment.getDOMNode().value; 
-    this.setState({comment: commentInput});
+    var comment_input = this.refs.comment.getDOMNode().value; 
+    this.setState({comment: comment_input});
   },
 
 
@@ -41,52 +40,33 @@ var Form  = React.createClass({
   },
 
 
-  logMatch: function(obj) {
-    var obj = {unconfirmed_match: obj};
-    console.log(obj);
-    r$({
-      url:         '/api/unconfirmed_matches',
-      type:        'json',
-      method:      'POST',
-      data:        obj,
-      contentType: 'application/json'
-    }).then(function(response) {
-      console.log(response);
-    }.bind(this)).fail(function(response) {
-      console.log('fail');
-    });
-  },
-
-
-  handleSubmit: function(event) {
-    event.preventDefault();
-    this.logMatch({
+  handleSubmit: function() {
+    this.props.update({
       game: this.state.game, 
-      matchType: this.state.matchType,
-      players: this.state.players,
+      match_type: this.state.match_type,
+      teams: this.state.teams,
       comment: this.state.comment
     });
   },
 
 
   render: function() {
-    var max = this.state.matchType == "Duel" ? 2 : 100;
-    var inputs = this.state.matchType == "Teamer" ? <TeamInput update={this.updatePlayers} /> : <PlayerInput update={this.updatePlayers} max={max}/>;
+    var max = this.state.match_type == "Duel" ? 2 : 100;
+    var inputs = this.state.match_type == "Teamer" ? <TeamInput update={this.updateTeams} /> : <PlayerInput update={this.updateTeams} max={max}/>;
     return (
-      <div>
-        <select ref="game" onChange={this.handleGame} value={this.state.game}>
-          <option value="CivV">Civilization V</option>
-          <option value="CivBE">Civilization Beyond Earth</option>
-        </select>
-        <select ref="match_type" onChange={this.handleType} value={this.state.matchType}>
-          <option value="FFA">FFA</option>
-          <option value="Duel">Duel</option>
-          <option value="Teamer">Teamer</option>
-        </select>
-        {inputs}
-        <textarea ref="comment" onChange={this.logComment} placeholder="Comments"></textarea>
-        <button onClick={this.handleSubmit}>Submit</button>
-      </div>
+       <div>
+         <select ref="game" onChange={this.handleGame} value={this.state.game}>
+           <option value="CivV">Civilization V</option>
+           <option value="CivBE">Civilization Beyond Earth</option>
+         </select>
+         <select ref="match_type" onChange={this.handleType} value={this.state.match_type}>
+           <option value="FFA">FFA</option>
+           <option value="Duel">Duel</option>
+           <option value="Teamer">Teamer</option>
+         </select>
+         {inputs}
+         <textarea ref="comment" onKeyUp={this.handleSubmit} onChange={this.logComment} placeholder="Comments"></textarea>
+       </div>
     );
   }
 
