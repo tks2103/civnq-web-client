@@ -8,18 +8,27 @@ var React           = require('react/addons'),
     Match           = require('./Match');
 
 var ConfirmedMatches = React.createClass({
+  
+  getMatch: function() { 
+    var confirmedMatches = this.props.data.confirmed_matches;
+    var matchesToRender = confirmedMatches.map(function(i){
+      return (
+          <Match data={i}/>
+      );
+    });  
+    return matchesToRender;
+  },
 
   render: function() {
+    var matches = this.getMatch();
     return (
       <div>
-        <Match />
-        <Match />
-        <Match />
-        <Match />
+        {matches}
       </div>
     );
   }
 
 });
+
 
 module.exports = ConfirmedMatches;
