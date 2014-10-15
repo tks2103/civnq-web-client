@@ -5,6 +5,7 @@
 'use strict';
 
 var React       = require('react/addons'),
+    Button      = require('react-bootstrap/Button'),
     PlayerInput = require('./PlayerInput');
 
 var TeamInput  = React.createClass({
@@ -51,7 +52,7 @@ var TeamInput  = React.createClass({
  
 
  generateButton: function(){
-    return (<button onClick={this.handleClick}>New Team</button>); 
+    return (<Button onClick={this.handleClick}>New Team</Button>); 
  },
 
 

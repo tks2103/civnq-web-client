@@ -4,9 +4,12 @@
 
 'use strict';
 
-var React       = require('react/addons'),
-    TeamInput   = require('./TeamInput'),
-    PlayerInput = require('./PlayerInput');
+var React           = require('react/addons'),
+    TeamInput       = require('./TeamInput'),
+    Input           = require('react-bootstrap/Input'),
+    DropdownButton  = require('react-bootstrap/DropdownButton'),
+    MenuItem        = require('react-bootstrap/MenuItem'),
+    PlayerInput     = require('./PlayerInput');
 
 
 var Form  = React.createClass({
@@ -14,7 +17,7 @@ var Form  = React.createClass({
   getInitialState: function() {
     return {
       game: "CivV",
-      matchType: "FFA"
+      match_type: "FFA"
     }
   },
 
@@ -25,18 +28,18 @@ var Form  = React.createClass({
   
 
   logComment: function() { 
-    var comment_input = this.refs.comment.getDOMNode().value; 
+    var comment_input = this.refs.comment.getValue(); 
     this.setState({comment: comment_input});
   },
 
 
-  handleGame: function(event) {
-    this.setState({ game: event.nativeEvent.target.value });
+  handleGame: function(game) {
+    this.setState({ game: game });
   },
 
 
-  handleType: function(event) {
-    this.setState({ matchType: event.nativeEvent.target.value });
+  handleType: function(match) {
+    this.setState({ match_type: match });
   },
 
 
@@ -55,17 +58,18 @@ var Form  = React.createClass({
     var inputs = this.state.match_type == "Teamer" ? <TeamInput update={this.updateTeams} /> : <PlayerInput update={this.updateTeams} max={max}/>;
     return (
        <div>
-         <select ref="game" onChange={this.handleGame} value={this.state.game}>
-           <option value="CivV">Civilization V</option>
-           <option value="CivBE">Civilization Beyond Earth</option>
-         </select>
-         <select ref="match_type" onChange={this.handleType} value={this.state.match_type}>
-           <option value="FFA">FFA</option>
-           <option value="Duel">Duel</option>
-           <option value="Teamer">Teamer</option>
-         </select>
+         <DropdownButton title={"Game"} ref="game" onChange={this.handleGame} value={this.state.game}>
+           <MenuItem onSelect={this.handleGame.bind(this, "CivV")} value="CivV">Civilization V</MenuItem>
+           <MenuItem onSelect={this.handleGame.bind(this, "CivBE")} value="CivBE">Civilization Beyond Earth</MenuItem>
+         </DropdownButton>
+         <DropdownButton title={"Match Type"} ref="match_type" onChange={this.handleType} value={this.state.match_type}>
+           <MenuItem onSelect={this.handleType.bind(this, "FFA")} value="FFA">FFA</MenuItem>
+           <MenuItem onSelect={this.handleType.bind(this, "Duel")} value="Duel">Duel</MenuItem>
+           <MenuItem onSelect={this.handleType.bind(this, "Teamer")} value="Teamer">Teamer</MenuItem>
+         </DropdownButton>
          {inputs}
-         <textarea ref="comment" onKeyUp={this.handleSubmit} onChange={this.logComment} placeholder="Comments"></textarea>
+         Comments
+         <Input type="textarea" label=""  ref="comment" onKeyUp={this.handleSubmit} onChange={this.logComment} />
        </div>
     );
   }

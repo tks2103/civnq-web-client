@@ -1,0 +1,36 @@
+
+var root_comp = React.component({
+
+  fn: function(num, item) {
+    return "Num: " + num + " item: " + item;
+  },
+
+
+  render: function() {
+    return (
+      <comp specialFn={this.fn} />
+      <comp_data specialValue={value} />
+    );
+  }
+});
+
+var comp = React.component({
+  render: function() { 
+    var importantVariable = this.props.specialFn(things);
+    return (
+      {importantVariable}    
+    );
+  }
+});
+
+
+var comp_data = React.component({
+
+
+  render: function() {
+    var importantVariable = this.props.specialValue == "one" ? 1 : 0;
+    return (
+      {importantVariable}
+    ); 
+  }
+})
