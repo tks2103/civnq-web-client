@@ -23,33 +23,42 @@ var Form  = React.createClass({
 
 
   updateTeams: function(obj) {
-     this.setState({ teams: obj}); 
+     this.setState({ teams: obj }); 
+     this.prepareSubmit();
   },  
   
 
   logComment: function() { 
     var comment_input = this.refs.comment.getValue(); 
     this.setState({comment: comment_input});
+    this.prepareSubmit();
   },
 
 
   handleGame: function(game) {
     this.setState({ game: game });
+    this.prepareSubmit();
   },
 
 
   handleType: function(match) {
     this.setState({ match_type: match });
+    this.prepareSubmit();
   },
 
 
-  handleSubmit: function() {
-    this.props.update({
-      game: this.state.game, 
+  stateObject: function() {
+    return {
+      game: this.state.game,
       match_type: this.state.match_type,
       teams: this.state.teams,
       comment: this.state.comment
-    });
+    };
+  },
+
+
+  prepareSubmit: function() {
+    this.props.update(this.stateObject());
   },
 
 
@@ -69,7 +78,7 @@ var Form  = React.createClass({
          </DropdownButton>
          {inputs}
          Comments
-         <Input type="textarea" label=""  ref="comment" onKeyUp={this.handleSubmit} onChange={this.logComment} />
+         <Input type="textarea" label=""  ref="comment" onChange={this.logComment} />
        </div>
     );
   }
