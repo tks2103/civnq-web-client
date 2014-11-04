@@ -33,29 +33,29 @@ var PlayerInput  = React.createClass({
   },
 
 
-  logPlayers: function() { 
+  logPlayers: function() {
     var players = [];
     var validations = [];
     for(var i = 0; i < this.state.inputs; i++) {
       var player = (this.refs['playerInput' + i].getValue());
       validations.push(this.validate(player));
       //cache validationState
-      players.push(player);
-    } 
+      players.push([player]);
+    }
     this.props.update(players);
     this.setState({ validations: validations });
   },
 
 
-  validationState: function(i) { 
+  validationState: function(i) {
     return this.state.validations[i];
   },
 
-  
+
   generateInputs: function(num) {
     var inputs = [];
     for(var i = 0; i < num; i++) {
-      var playerInput = "playerInput" + i; 
+      var playerInput = "playerInput" + i;
       inputs.push(
         <Input
           onKeyUp={this.logPlayers}
@@ -71,11 +71,11 @@ var PlayerInput  = React.createClass({
           groupClassName="group-class"
           wrapperClassName="wrapper-class"
           labelClassName="label-class" />
-      ); 
+      );
     }
     return inputs;
   },
-  
+
   isMax: function() {
     return (this.state.inputs == this.props.max);
   },
@@ -83,10 +83,10 @@ var PlayerInput  = React.createClass({
 
   renderButton: function() {
     if (this.isMax() == false) {
-      return (<Button onClick={this.handleClick}>+</Button>) 
+      return (<Button onClick={this.handleClick}>+</Button>)
     } else {
-      return null;  
-    } 
+      return null;
+    }
   },
 
 

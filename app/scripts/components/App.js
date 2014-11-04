@@ -102,7 +102,7 @@ var App = React.createClass({
   render: function() {
     return (
       <div id='app'>
-        {this.state.postMatchModal ? <PostMatch togglePostMatch={this.togglePostMatch} /> : null }
+        {this.state.postMatchModal ? <PostMatch togglePostMatch={this.togglePostMatch} user={this.state.user} /> : null }
         <Header togglePostMatch={this.togglePostMatch}
                 displayConfirmedMatches={this.displayConfirmedMatches}
                 displayUnconfirmedMatches={this.displayUnconfirmedMatches}

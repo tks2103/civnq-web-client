@@ -25,6 +25,7 @@ var PostMatch = React.createClass({
 
   submitMatch: function(obj) {
     var obj = { unconfirmed_match: obj };
+    obj['reporter_id'] = this.props.user.steamid;
     r$({
       url:         '/api/unconfirmed_matches',
       type:        'json',
