@@ -20,7 +20,8 @@ var React               = require('react/addons'),
 var App = React.createClass({
 
   getInitialState: function() {
-    return ( { 
+    return ( {
+      user: null,
       postMatchModal: false,
       body: "Rankings"
     } );
@@ -29,6 +30,34 @@ var App = React.createClass({
 
   togglePostMatch: function() {
     this.setState({ postMatchModal: !this.state.postMatchModal });
+  },
+
+
+  getLoginStatus: function() {
+    r$({
+      url:         '/api/sessions',
+      type:        'json',
+      method:      'GET',
+      contentType: 'application/json'
+    }).then(function(response) {
+      this.setState({ user: response });
+    }.bind(this)).fail(function(response) {
+      console.log('fail');
+    });
+  },
+
+
+  logout: function() {
+    r$({
+      url:         '/api/sessions/1',
+      type:        'json',
+      method:      'DELETE',
+      contentType: 'application/json'
+    }).then(function(response) {
+      this.setState({ user: null });
+    }.bind(this)).fail(function(response) {
+      console.log('fail');
+    });
   },
 
 
@@ -60,24 +89,31 @@ var App = React.createClass({
   },
 
 
-  displayRankings: function() { 
+  displayRankings: function() {
     this.setState({ body: "Rankings" });
+  },
+
+
+  componentWillMount: function() {
+    this.getLoginStatus();
   },
 
 
   render: function() {
     return (
       <div id='app'>
-       {this.state.postMatchModal ? <PostMatch togglePostMatch={this.togglePostMatch} /> : null }
-          <Header togglePostMatch={this.togglePostMatch} 
-                 displayConfirmedMatches={this.displayConfirmedMatches} 
-                 displayUnconfirmedMatches={this.displayUnconfirmedMatches}
-                 displayRankings={this.displayRankings} />
-          <Grid>
-            {this.state.body == "Rankings" ? <Body /> : null}
-            {this.state.body == "Rankings" ? <Rankings /> : null}
-            {this.state.body == "UnconfirmedMatches" ? <UnconfirmedMatches data={this.state.unconfirmed_matches} /> : null}
-            {this.state.body == "ConfirmedMatches" ? <ConfirmedMatches data={this.state.confirmed_matches} /> : null}
+        {this.state.postMatchModal ? <PostMatch togglePostMatch={this.togglePostMatch} /> : null }
+        <Header togglePostMatch={this.togglePostMatch}
+                displayConfirmedMatches={this.displayConfirmedMatches}
+                displayUnconfirmedMatches={this.displayUnconfirmedMatches}
+                displayRankings={this.displayRankings}
+                user={this.state.user}
+                logout={this.logout} />
+        <Grid>
+          {this.state.body == "Rankings" ? <Body /> : null}
+          {this.state.body == "Rankings" ? <Rankings /> : null}
+          {this.state.body == "UnconfirmedMatches" ? <UnconfirmedMatches data={this.state.unconfirmed_matches} /> : null}
+          {this.state.body == "ConfirmedMatches" ? <ConfirmedMatches data={this.state.confirmed_matches} /> : null}
         </Grid>
       </div>
     );
