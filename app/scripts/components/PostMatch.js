@@ -18,7 +18,6 @@ var PostMatch = React.createClass({
  
 
   handleClick: function() {
-    console.log(this.state.match);
     this.submitMatch(this.state.match);
     this.props.togglePostMatch();
   },  
