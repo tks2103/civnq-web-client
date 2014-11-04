@@ -13,7 +13,6 @@ var React           = require('react/addons'),
 var PostMatch = React.createClass({
   
   updateMatchState: function(obj) {
-    console.log(obj);
     this.setState({ match: obj}); 
   },  
  
