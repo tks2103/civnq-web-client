@@ -11,17 +11,17 @@ var React           = require('react/addons'),
     Form            = require('./Form');
 
 var PostMatch = React.createClass({
-  
+
   updateMatchState: function(obj) {
-    this.setState({ match: obj}); 
-  },  
- 
+    this.setState({ match: obj});
+  },
+
 
   handleClick: function() {
     this.submitMatch(this.state.match);
     this.props.togglePostMatch();
-  },  
- 
+  },
+
 
   submitMatch: function(obj) {
     var obj = { unconfirmed_match: obj };

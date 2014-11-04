@@ -25,7 +25,7 @@ var Header = React.createClass({
             <MenuItem onSelect={this.props.displayUnconfirmedMatches} key="1">Unconfirmed Matches</MenuItem>
             <MenuItem onSelect={this.props.displayConfirmedMatches} key="2">Recently Confirmed</MenuItem>
           </DropdownButton>
-          <NavItem key={2} href="#">Login</NavItem>
+          <NavItem key={2} href="/api/auth/open_id?openid_url=http://steamcommunity.com/openid/">Login</NavItem>
         </Nav>
       </Navbar>
     );
