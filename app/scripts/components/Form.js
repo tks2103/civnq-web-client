@@ -11,38 +11,51 @@ var React           = require('react/addons'),
     MenuItem        = require('react-bootstrap/MenuItem'),
     PlayerInput     = require('./PlayerInput');
 
+var GAME_TYPE = {
+  "CivV": 0,
+  "CivBE": 1
+};
+
+var MATCH_TYPE = {
+  "FFA": 0,
+  "Duel": 1,
+  "Teamer": 2
+};
+
 
 var Form  = React.createClass({
 
   getInitialState: function() {
     return {
-      game: "CivV",
-      match_type: "FFA"
+      game: GAME_TYPE["CivV"],
+      match_type: MATCH_TYPE["FFA"]
     }
   },
 
 
   updateTeams: function(obj) {
-     this.setState({ teams: obj }); 
+     this.setState({ teams: obj });
      this.prepareSubmit();
-  },  
-  
+  },
 
-  logComment: function() { 
-    var comment_input = this.refs.comment.getValue(); 
+
+  logComment: function() {
+    var comment_input = this.refs.comment.getValue();
     this.setState({comment: comment_input});
     this.prepareSubmit();
   },
 
 
   handleGame: function(game) {
+    var game = GAME_TYPE[game];
     this.setState({ game: game });
     this.prepareSubmit();
   },
 
 
   handleType: function(match) {
-    this.setState({ match_type: match });
+    var match_type = MATCH_TYPE[match];
+    this.setState({ match_type: match_type });
     this.prepareSubmit();
   },
 

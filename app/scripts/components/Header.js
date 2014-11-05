@@ -24,6 +24,7 @@ var Header = React.createClass({
           <DropdownButton ref="dropdown" key={3} title="View Matches">
             <MenuItem onSelect={this.props.displayUnconfirmedMatches} key="1">Unconfirmed Matches</MenuItem>
             <MenuItem onSelect={this.props.displayConfirmedMatches} key="2">Recently Confirmed</MenuItem>
+            <MenuItem onSelect={this.props.displayRejectedMatches} key="3">Rejected Matches</MenuItem>
           </DropdownButton>
           {this.props.user ?
             <NavItem key={2} onClick={this.props.logout}>Logout</NavItem> :
