@@ -11,6 +11,7 @@ var React               = require('react/addons'),
     Body                = require('./Body'),
     UnconfirmedMatches  = require('./UnconfirmedMatches'),
     ConfirmedMatches    = require('./ConfirmedMatches'),
+    RejectedMatches     = require('./RejectedMatches'),
     PostMatch           = require('./PostMatch'),
     Grid                = require('react-bootstrap/Grid'),
     Row                 = require('react-bootstrap/Row'),
@@ -89,6 +90,20 @@ var App = React.createClass({
   },
 
 
+  displayRejectedMatches: function() {
+    r$({
+      url:         '/api/rejected_matches',
+      type:        'json',
+      method:      'GET',
+      contentType: 'application/json'
+    }).then(function(response) {
+      this.setState({ body: "RejectedMatches", rejected_matches: response });
+    }.bind(this)).fail(function(response) {
+      console.log('fail');
+    });
+  },
+
+
   displayRankings: function() {
     this.setState({ body: "Rankings" });
   },
@@ -102,11 +117,12 @@ var App = React.createClass({
   render: function() {
     return (
       <div id='app'>
-        {this.state.postMatchModal ? <PostMatch togglePostMatch={this.togglePostMatch} /> : null }
+        {this.state.postMatchModal ? <PostMatch togglePostMatch={this.togglePostMatch} user={this.state.user} /> : null }
         <Header togglePostMatch={this.togglePostMatch}
                 displayConfirmedMatches={this.displayConfirmedMatches}
                 displayUnconfirmedMatches={this.displayUnconfirmedMatches}
                 displayRankings={this.displayRankings}
+                displayRejectedMatches={this.displayRejectedMatches}
                 user={this.state.user}
                 logout={this.logout} />
         <Grid>
@@ -114,6 +130,7 @@ var App = React.createClass({
           {this.state.body == "Rankings" ? <Rankings /> : null}
           {this.state.body == "UnconfirmedMatches" ? <UnconfirmedMatches data={this.state.unconfirmed_matches} /> : null}
           {this.state.body == "ConfirmedMatches" ? <ConfirmedMatches data={this.state.confirmed_matches} /> : null}
+          {this.state.body == "RejectedMatches" ? <RejectedMatches data={this.state.rejected_matches} /> : null}
         </Grid>
       </div>
     );

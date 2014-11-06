@@ -5,8 +5,10 @@
 'use strict';
 
 var React           = require('react/addons'),
+    r$              = require('reqwest'),
     Panel           = require('react-bootstrap/Panel'),
     Well            = require('react-bootstrap/Well'),
+    Button          = require('react-bootstrap/Button'),
     ListGroup       = require('react-bootstrap/ListGroup'),
     ListGroupItem   = require('react-bootstrap/ListGroupItem');
 
@@ -28,6 +30,20 @@ var Match = React.createClass({
     }
     return players;
  },
+
+  rejectMatch: function() {
+    var obj = { id: this.props.data.id };
+    r$({
+      url:         '/api/unconfirmed_matches/' + this.props.data.id + '/reject',
+      type:        'json',
+      method:      'POST',
+      contentType: 'application/json'
+    }).then(function(response) {
+      this.setState({ user: response });
+    }.bind(this)).fail(function(response) {
+      console.log('fail');
+    });
+  },
  
 
   render: function() {
@@ -35,6 +51,7 @@ var Match = React.createClass({
     return (
       <Panel>
         <h3> Game #1000 </h3>
+        <Button onClick={this.rejectMatch} >Reject</Button>
         <Well>
           <p>Type: {this.props.data.match_type}</p>
           <p>Reported by: Arvius</p>
