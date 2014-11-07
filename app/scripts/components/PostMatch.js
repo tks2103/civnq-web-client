@@ -13,6 +13,7 @@ var React           = require('react/addons'),
 var PostMatch = React.createClass({
 
   updateMatchState: function(obj) {
+    obj.reporter_id = this.props.user.steamid;
     this.setState({ match: obj});
   },
 
@@ -24,8 +25,7 @@ var PostMatch = React.createClass({
 
 
   submitMatch: function(obj) {
-    var obj = { unconfirmed_match: obj };
-    obj['reporter_id'] = this.props.user.steamid;
+    var obj = { unconfirmed_match: obj};
     r$({
       url:         '/api/unconfirmed_matches',
       type:        'json',
