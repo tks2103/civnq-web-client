@@ -50,11 +50,11 @@ var Match = React.createClass({
     var players = this.generatePlayers(this.props.data.teams.length);
     return (
       <Panel>
-        <h3> Game #1000 </h3>
-        <Button onClick={this.rejectMatch} >Reject</Button>
+        <h3> {this.props.data.game} </h3>
+        <Button onClick={this.rejectMatch}>Reject</Button>
         <Well>
           <p>Type: {this.props.data.match_type}</p>
-          <p>Reported by: Arvius</p>
+          <p>{this.props.data.reporter_id}</p>
         </Well>
 
         <Well>
